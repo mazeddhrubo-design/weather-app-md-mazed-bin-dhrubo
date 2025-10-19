@@ -1,0 +1,68 @@
+Tool: ChatGpt
+Date: 2025-10-13
+
+ME:
+Explain this logic
+
+def _summarise_rain(df: pd.DataFrame) -> str:
+    total = df["precipitation_mm"].sum()
+    wet_days = int((df["precipitation_mm"] > 0).sum())
+    return f"Total precipitation: {total:.1f} mm across {wet_days} day(s)"
+AI:
+
+Let’s break this down simply 
+
+def _summarise_rain(df: pd.DataFrame) -> str:
+    total = df["precipitation_mm"].sum()
+    wet_days = int((df["precipitation_mm"] > 0).sum())
+    return f"Total precipitation: {total:.1f} mm across {wet_days} day(s)"
+
+Step-by-step explanation:
+
+Function purpose:
+The function summarises rainfall information from a weather dataset stored in a Pandas DataFrame (df).
+
+total = df["precipitation_mm"].sum()
+
+This line adds up all the rainfall values (in millimetres) from the column "precipitation_mm".
+
+The result is the total rainfall for the dataset period.
+
+wet_days = int((df["precipitation_mm"] > 0).sum())
+
+(df["precipitation_mm"] > 0) creates a Boolean Series — True where rainfall > 0, False where no rain.
+
+.sum() counts how many True values exist (since True = 1, False = 0).
+
+The result is the number of days with any rain.
+
+int() ensures the count is an integer.
+
+return f"Total precipitation: {total:.1f} mm across {wet_days} day(s)"
+
+Formats the message to one decimal place (:.1f) for neatness.
+
+Returns a descriptive summary string.
+
+Example:
+
+Suppose your dataset looks like this:
+
+day	precipitation_mm
+1	0.0
+2	5.2
+3	0.0
+4	3.4
+5	1.1
+
+total = 5.2 + 3.4 + 1.1 = 9.7
+
+wet_days = 3 (since rain > 0 on 3 days)
+
+Output:
+
+"Total precipitation: 9.7 mm across 3 day(s)"
+
+
+So, in short —
+It adds up all the rain and counts how many days it rained, then returns a summary sentence.
